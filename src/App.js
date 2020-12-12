@@ -5,113 +5,118 @@ const foods = [
   {
     id: "01",
     type: "burger",
-    rating: "9/10",
+    rating: "7.5/10",
     location: "/images/burger-1.png",
-    name: "Meat Burger",
+    name: "Veggie Burger",
   },
   {
     id: "02",
     type: "burger",
-    rating: "9/10",
+    rating: "6/10",
     location: "/images/burger-2.png",
-    name: "Meat Burger",
+    name: "Black Bean Burger",
   },
   {
     id: "03",
     type: "burger",
-    rating: "9/10",
+    rating: "9.5/10",
     location: "/images/burger-3.png",
-    name: "Meat Burger",
+    name: "Wild Salmon Burger",
   },
   {
     id: "04",
     type: "burger",
-    rating: "9/10",
+    rating: "8/10",
     location: "/images/burger-4.png",
-    name: "Meat Burger",
+    name: "Cheese Burger",
   },
   {
     id: "05",
     type: "burger",
-    rating: "9/10",
+    rating: "7.5/10",
     location: "/images/burger-5.png",
-    name: "Meat Burger",
+    name: "Turkey Burger",
   },
   {
     id: "06",
     type: "pizza",
-    rating: "9/10",
+    rating: "6/10",
     location: "/images/pizza-1.png",
-    name: "Meat Pizza",
+    name: "Pepperoni Pizza",
   },
   {
     id: "07",
     type: "pizza",
-    rating: "9/10",
+    rating: "9.5/10",
     location: "/images/pizza-2.png",
-    name: "Meat Pizza",
+    name: "Margherita Pizza",
   },
   {
     id: "08",
     type: "pizza",
-    rating: "9/10",
+    rating: "8/10",
     location: "/images/pizza-3.png",
-    name: "Meat Pizza",
+    name: "BBQ Chicken Pizza",
   },
   {
     id: "09",
     type: "pizza",
-    rating: "9/10",
+    rating: "7.5/10",
     location: "/images/pizza-4.png",
-    name: "Meat Pizza",
+    name: "Hawaiian Pizza",
   },
   {
     id: "10",
     type: "pizza",
-    rating: "9/10",
+    rating: "6/10",
     location: "/images/pizza-5.png",
-    name: "Meat Pizza",
+    name: "Mexican Green Wave Pizza",
   },
   {
     id: "11",
     type: "salad",
-    rating: "9/10",
+    rating: "4.5/10",
     location: "/images/salad-1.png",
-    name: "Meat Salad",
+    name: "Waldorf salad Salad",
   },
   {
     id: "12",
     type: "salad",
-    rating: "9/10",
+    rating: "7/10",
     location: "/images/salad-2.png",
-    name: "Meat Salad",
+    name: "Dressed Herring Salad",
   },
   {
     id: "13",
     type: "salad",
-    rating: "9/10",
+    rating: "8.5/10",
     location: "/images/salad-3.png",
-    name: "Meat Salad",
+    name: "Nicoise Salad",
   },
   {
     id: "14",
     type: "salad",
-    rating: "9/10",
+    rating: "8.5/10",
     location: "/images/salad-4.png",
-    name: "Meat Salad",
+    name: "Israeli Salad",
   },
   {
     id: "15",
     type: "salad",
-    rating: "9/10",
+    rating: "9.5/10",
     location: "/images/salad-5.png",
-    name: "Meat Salad",
+    name: "Mexican Black Bean  Salad",
   },
 ];
 
 function App() {
   const [food, setFood] = useState(foods);
-
+  const handleChange = (e) => {
+    const filtered = foods.filter((f) =>
+      f.name.toLowerCase().includes(e.target.value.toLowerCase())
+    );
+    setFood(filtered);
+  };
   const handleClick = (type) => {
     if (type === "all") {
       return setFood(foods);
@@ -122,88 +127,41 @@ function App() {
 
   return (
     <div className="App">
-      <h1>FOOD Listing App</h1>
-      <nav style={{ marginBottom: "1rem" }}>
-        <button
-          onClick={() => handleClick("all")}
-          style={{
-            padding: "10px 20px",
-            margin: "0 0.5rem",
-            color: "yellow",
-            border: "1px solid yellow",
-            background: "transparent",
-            cursor: "pointer",
-          }}
-        >
+      <h1>MyFood 🍔 Menu App</h1>
+      <nav className="nav">
+        <button className="btn" onClick={() => handleClick("all")}>
           All Foods
         </button>
-        <button
-          onClick={() => handleClick("burger")}
-          style={{
-            padding: "10px 20px",
-            margin: "0 0.5rem",
-            color: "yellow",
-            border: "1px solid yellow",
-            background: "transparent",
-            cursor: "pointer",
-          }}
-        >
-          Burger
+        <button className="btn" onClick={() => handleClick("burger")}>
+          Burgers
         </button>
-        <button
-          onClick={() => handleClick("pizza")}
-          style={{
-            padding: "10px 20px",
-            margin: "0 0.5rem",
-            color: "yellow",
-            border: "1px solid yellow",
-            background: "transparent",
-            cursor: "pointer",
-          }}
-        >
-          Pizza
+        <button className="btn" onClick={() => handleClick("pizza")}>
+          Pizzas
         </button>
-        <button
-          onClick={() => handleClick("salad")}
-          style={{
-            padding: "10px 20px",
-            margin: "0 0.5rem",
-            color: "yellow",
-            border: "1px solid yellow",
-            background: "transparent",
-            cursor: "pointer",
-          }}
-        >
-          Salad
+        <button className="btn" onClick={() => handleClick("salad")}>
+          Salads
         </button>
       </nav>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          maxWidth: "60vw",
-          margin: "0 auto",
-        }}
-      >
+      <div className="input-section">
+        <input
+          className="input"
+          onChange={handleChange}
+          placeholder="Search by item name"
+          type="search"
+        />
+      </div>
+      <div className="menu">
         {food.map((f) => (
-          <div
-            style={{
-              width: "150px",
-              border: "1px solid #777",
-              background: "yellow",
-              margin: "5px",
-              paddingBottom: "5px",
-            }}
-            key={f.id}
-          >
+          <div className="menu-item" key={f.id}>
             <img src={f.location} alt={f.name} width={150} />
-            <h4 style={{ color: "#555", margin: "0", paddingTop: "5px" }}>
-              {f.name}
-            </h4>
-            <small style={{ color: "#777", margin: "0" }}>{f.rating}</small>
+            <h4 className="menu-heading">{f.name}</h4>
+            <small className="menu-small">{f.rating}</small>
           </div>
         ))}
       </div>
+      <footer className="footer">
+        <small>&copy; MyFood {new Date().getFullYear()}</small>
+      </footer>
     </div>
   );
 }
