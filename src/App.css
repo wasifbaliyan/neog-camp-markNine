@@ -50,6 +50,7 @@ h1 {
 .menu {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   max-width: 650px;
   margin: 0 auto;
 }
