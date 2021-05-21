@@ -1,5 +1,6 @@
-import { useState } from "react";
+import React, { Suspense, useState } from "react";
 import "./App.css";
+const FoodItems = React.lazy(() => import("./FoodItems"));
 
 const foods = [
   {
@@ -150,15 +151,9 @@ function App() {
           type="search"
         />
       </div>
-      <div className="menu">
-        {food.map((f) => (
-          <div className="menu-item" key={f.id}>
-            <img src={f.location} alt={f.name} width={150} />
-            <h4 className="menu-heading">{f.name}</h4>
-            <small className="menu-small">{f.rating}</small>
-          </div>
-        ))}
-      </div>
+      <Suspense fallback={<div style={{ color: "#fff" }}>Loading...</div>}>
+        <FoodItems food={food} />
+      </Suspense>
       <footer className="footer">
         <small>&copy; MyFood {new Date().getFullYear()}</small>
       </footer>
