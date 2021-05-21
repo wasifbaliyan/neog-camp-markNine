@@ -6,6 +6,7 @@ export default function FoodItems({ food }) {
     <div className="menu">
       {food.map((f) => (
         <Suspense
+          key={f.id}
           fallback={
             <div
               style={{
