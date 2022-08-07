@@ -1,10 +1,11 @@
-import React, { Suspense } from "react";
+import * as React from "react";
+import { Food } from "./App";
 const FoodItemImg = React.lazy(() => import("./FoodItemImg"));
 
-export default function FoodItem({ item }) {
+export default function FoodItem({ item }:{item: Food}) {
   return (
     <div className="menu-item">
-      <Suspense
+      <React.Suspense
         fallback={
           <div
             style={{ width: "150px", height: "187px", background: "#eee" }}
@@ -12,7 +13,7 @@ export default function FoodItem({ item }) {
         }
       >
         <FoodItemImg item={item} />
-      </Suspense>
+      </React.Suspense>
       <h4 className="menu-heading">{item.name}</h4>
       <small className="menu-small">{item.rating}</small>
     </div>

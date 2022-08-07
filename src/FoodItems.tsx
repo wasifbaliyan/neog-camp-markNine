@@ -1,11 +1,13 @@
-import React, { Suspense } from "react";
+import * as React from "react";
+import { Food } from "./App";
+
 const FoodItem = React.lazy(() => import("./FoodItem"));
 
-export default function FoodItems({ food }) {
+export default function FoodItems(props:{food: Food[]}) {
   return (
     <div className="menu">
-      {food.map((f) => (
-        <Suspense
+      {props.food.map((f) => (
+        <React.Suspense
           key={f.id}
           fallback={
             <div
@@ -23,7 +25,7 @@ export default function FoodItems({ food }) {
           }
         >
           <FoodItem key={f.id} item={f} />
-        </Suspense>
+        </React.Suspense>
       ))}
     </div>
   );
