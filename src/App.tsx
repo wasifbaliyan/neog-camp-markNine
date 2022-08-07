@@ -1,8 +1,16 @@
-import React, { Suspense, useState } from "react";
+import * as React from "react";
 import "./App.css";
 const FoodItems = React.lazy(() => import("./FoodItems"));
 
-const foods = [
+
+export type Food = {
+  id: string,
+  type: string,rating: string,
+  location: string,
+  name: string
+}
+
+const foods:Food[] = [
   {
     id: "01",
     type: "burger",
@@ -111,14 +119,14 @@ const foods = [
 ];
 
 function App() {
-  const [food, setFood] = useState(foods);
-  const handleChange = (e) => {
+  const [food, setFood] = React.useState(foods);
+  const handleChange = (query:string) => {
     const filtered = foods.filter((f) =>
-      f.name.toLowerCase().includes(e.target.value.toLowerCase())
+      f.name.toLowerCase().includes(query.toLowerCase())
     );
     setFood(filtered);
   };
-  const handleClick = (type) => {
+  const handleClick = (type:string) => {
     if (type === "all") {
       return setFood(foods);
     }
@@ -146,14 +154,14 @@ function App() {
       <div className="input-section">
         <input
           className="input"
-          onChange={handleChange}
+          onChange={(e) => handleChange(e.target.value)}
           placeholder="Search by item name"
           type="search"
         />
       </div>
-      <Suspense fallback={<div style={{ color: "#fff" }}>Loading...</div>}>
+      <React.Suspense fallback={<div style={{ color: "#fff" }}>Loading...</div>}>
         <FoodItems food={food} />
-      </Suspense>
+      </React.Suspense>
       <footer className="footer">
         <small>&copy; MyFood {new Date().getFullYear()}</small>
       </footer>
